@@ -1,0 +1,100 @@
+{% extends 'usuarios/base.html' %}
+
+{% block content %}
+<div class="container mt-4">
+    <h2 class="mb-4">Avaliação de Cursos</h2>
+    
+    <div class="card mb-4">
+        <div class="card-header">
+            <i class="fas fa-star mr-1"></i>
+            Formulário de Avaliação
+        </div>
+        <div class="card-body">
+            <form method="post" action="{% url 'pesquisa' %}">
+                {% csrf_token %}
+                
+                <div class="form-group mb-3">
+                    <label for="nome">Nome Completo</label>
+                    <input type="text" class="form-control" id="nome" name="nome" required>
+                </div>
+                
+                <div class="form-group mb-3">
+                    <label for="email">E-mail</label>
+                    <input type="email" class="form-control" id="email" name="email" required>
+                </div>
+                
+                <div class="form-group mb-3">
+                    <label for="curso">Curso</label>
+                    <select class="form-control" id="curso" name="curso" required>
+                        <option value="">Selecione um curso</option>
+                        <option value="1">Excel Avançado</option>
+                        <option value="2">Informática</option>
+                        <option value="3">Hardware e Redes</option>
+                        <option value="4">Designer Gráfico</option>
+                        <option value="5">Administração</option>
+                        <option value="6">Inglês</option>
+                    </select>
+                </div>
+                
+                <div class="form-group mb-3">
+                    <label>Avaliação do Curso (1-5)</label>
+                    <div class="rating">
+                        <div class="form-check form-check-inline">
+                            <input class="form-check-input" type="radio" name="nota" id="nota1" value="1" required>
+                            <label class="form-check-label" for="nota1">1</label>
+                        </div>
+                        <div class="form-check form-check-inline">
+                            <input class="form-check-input" type="radio" name="nota" id="nota2" value="2">
+                            <label class="form-check-label" for="nota2">2</label>
+                        </div>
+                        <div class="form-check form-check-inline">
+                            <input class="form-check-input" type="radio" name="nota" id="nota3" value="3">
+                            <label class="form-check-label" for="nota3">3</label>
+                        </div>
+                        <div class="form-check form-check-inline">
+                            <input class="form-check-input" type="radio" name="nota" id="nota4" value="4">
+                            <label class="form-check-label" for="nota4">4</label>
+                        </div>
+                        <div class="form-check form-check-inline">
+                            <input class="form-check-input" type="radio" name="nota" id="nota5" value="5">
+                            <label class="form-check-label" for="nota5">5</label>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="form-group mb-3">
+                    <label for="comentario">Comentários</label>
+                    <textarea class="form-control" id="comentario" name="comentario" rows="3"></textarea>
+                </div>
+                
+                <button type="submit" class="btn btn-primary">Enviar Avaliação</button>
+            </form>
+        </div>
+    </div>
+    
+    <div class="row mt-4">
+        <div class="col-12">
+            <div class="card mb-4">
+                <div class="card-header">
+                    <i class="fas fa-info-circle mr-1"></i>
+                    Informações
+                </div>
+                <div class="card-body">
+                    <p>Sua avaliação é muito importante para melhorarmos continuamente nossos cursos. Agradecemos sua participação!</p>
+                </div>
+            </div>
+            <div class="card mb-4">
+                <div class="card-header">
+                    <i class="fab fa-whatsapp mr-1"></i>
+                    WhatsApp
+                </div>
+                <div class="card-body">
+                    <a href="https://api.whatsapp.com/send?phone=1137669911" target="_blank" class="btn btn-success">
+                        <i class="fab fa-whatsapp"></i> Fale conosco no WhatsApp
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

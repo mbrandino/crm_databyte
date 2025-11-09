@@ -1,0 +1,131 @@
+{% extends 'usuarios/base.html' %}
+
+{% block content %}
+<div class="container mt-4">
+    <h2 class="mb-4">Controle de Contatos - Relatório de Interesses</h2>
+    
+    <div class="card">
+        <div class="card-header">
+            <i class="fas fa-chart-bar mr-1"></i>
+            Relatório de Manifestações de Interesse
+        </div>
+        <div class="card-body">
+            {% if interesses %}
+                <div class="table-responsive">
+                    <table class="table table-striped table-hover">
+                        <thead class="thead-dark">
+                            <tr>
+                                <th scope="col">#</th>
+                                <th scope="col">Nome</th>
+                                <th scope="col">Telefone</th>
+                                <th scope="col">E-mail</th>
+                                <th scope="col">Curso</th>
+                                <th scope="col">Bolsista</th>
+                                <th scope="col">Profissão</th>
+                                <th scope="col">Horário</th>
+                                <th scope="col">Contato</th>
+                                <th scope="col">Data</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for interesse in interesses %}
+                            <tr>
+                                <th scope="row">{{ interesse.id }}</th>
+                                <td>{{ interesse.nome }}</td>
+                                <td>{{ interesse.telefone }}</td>
+                                <td>{{ interesse.email }}</td>
+                                <td>{{ interesse.curso.nome }}</td>
+                                <td>
+                                    {% if interesse.bolsista %}
+                                        <span class="badge badge-success">Sim</span>
+                                    {% else %}
+                                        <span class="badge badge-secondary">Não</span>
+                                    {% endif %}
+                                </td>
+                                <td>{{ interesse.profissao }}</td>
+                                <td>
+                                    {% if interesse.horario == 'manha' %}Manhã
+                                    {% elif interesse.horario == 'tarde' %}Tarde
+                                    {% elif interesse.horario == 'noite' %}Noite
+                                    {% elif interesse.horario == 'integral' %}Integral
+                                    {% elif interesse.horario == 'fins_semana' %}Fins de Semana
+                                    {% endif %}
+                                </td>
+                                <td>
+                                    {% if interesse.contato == 'telefone' %}Telefone
+                                    {% elif interesse.contato == 'whatsapp' %}WhatsApp
+                                    {% elif interesse.contato == 'email' %}E-mail
+                                    {% elif interesse.contato == 'presencial' %}Presencial
+                                    {% endif %}
+                                </td>
+                                <td>{{ interesse.data_cadastro|date:"d/m/Y H:i" }}</td>
+                            </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+                
+                <div class="row mt-4">
+                    <div class="col-md-6">
+                        <div class="card bg-light">
+                            <div class="card-body">
+                                <h5 class="card-title">Estatísticas</h5>
+                                <p class="card-text">
+                                    <strong>Total de Interesses:</strong> {{ interesses|length }}<br>
+                                    <strong>Bolsistas:</strong> {{ interesses|length }} <!-- Será calculado via template filter se necessário -->
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="card bg-light">
+                            <div class="card-body">
+                                <h5 class="card-title">Ações</h5>
+                                <a href="{% url 'interesse' %}" class="btn btn-primary">
+                                    <i class="fas fa-plus"></i> Nova Manifestação
+                                </a>
+                                <button class="btn btn-success" onclick="window.print()">
+                                    <i class="fas fa-print"></i> Imprimir Relatório
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            {% else %}
+                <div class="alert alert-info" role="alert">
+                    <i class="fas fa-info-circle"></i>
+                    Nenhuma manifestação de interesse foi registrada ainda.
+                    <a href="{% url 'interesse' %}" class="alert-link">Clique aqui para registrar a primeira</a>.
+                </div>
+            {% endif %}
+        </div>
+    </div>
+    
+    <div class="row mt-4">
+        <div class="col-12">
+            <div class="card mb-4">
+                <div class="card-header">
+                    <i class="fab fa-whatsapp mr-1"></i>
+                    WhatsApp
+                </div>
+                <div class="card-body">
+                    <a href="https://api.whatsapp.com/send?phone=1137669911" target="_blank" class="btn btn-success">
+                        <i class="fab fa-whatsapp"></i> Fale conosco no WhatsApp
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<style>
+@media print {
+    .btn, .card-header, .alert, .row:last-child {
+        display: none !important;
+    }
+    .table {
+        font-size: 12px;
+    }
+}
+</style>
+{% endblock %}

@@ -1,0 +1,111 @@
+{% extends 'usuarios/base.html' %}
+
+{% block content %}
+<div class="container mt-4">
+    <h2 class="mb-4">Manifestação de Interesse</h2>
+    
+    <div class="card mb-4">
+        <div class="card-header">
+            <i class="fas fa-user-plus mr-1"></i>
+            Formulário de Interesse
+        </div>
+        <div class="card-body">
+            <form method="post" action="{% url 'interesse' %}">
+                {% csrf_token %}
+                
+                <div class="form-group mb-3">
+                    <label for="nome">Nome Completo</label>
+                    <input type="text" class="form-control" id="nome" name="nome" required>
+                </div>
+                
+                <div class="form-group mb-3">
+                    <label for="telefone">Telefone</label>
+                    <input type="tel" class="form-control" id="telefone" name="telefone" required>
+                </div>
+                
+                <div class="form-group mb-3">
+                    <label for="email">E-mail</label>
+                    <input type="email" class="form-control" id="email" name="email" required>
+                </div>
+                
+                <div class="form-group mb-3">
+                    <label for="curso">Curso de Interesse</label>
+                    <select class="form-control" id="curso" name="curso" required>
+                        <option value="">Selecione um curso</option>
+                        {% for curso in cursos %}
+                            <option value="{{ curso.id }}">{{ curso.nome }}</option>
+                        {% endfor %}
+                    </select>
+                </div>
+                
+                <div class="form-group mb-3">
+                    <label>É Bolsista?</label>
+                    <div class="form-check">
+                        <input class="form-check-input" type="radio" name="bolsista" id="bolsista_sim" value="true" required>
+                        <label class="form-check-label" for="bolsista_sim">Sim</label>
+                    </div>
+                    <div class="form-check">
+                        <input class="form-check-input" type="radio" name="bolsista" id="bolsista_nao" value="false">
+                        <label class="form-check-label" for="bolsista_nao">Não</label>
+                    </div>
+                </div>
+                
+                <div class="form-group mb-3">
+                    <label for="profissao">Profissão</label>
+                    <input type="text" class="form-control" id="profissao" name="profissao" required>
+                </div>
+                
+                <div class="form-group mb-3">
+                    <label for="horario">Horário de Preferência</label>
+                    <select class="form-control" id="horario" name="horario" required>
+                        <option value="">Selecione um horário</option>
+                        <option value="manha">Manhã</option>
+                        <option value="tarde">Tarde</option>
+                        <option value="noite">Noite</option>
+                        <option value="integral">Integral</option>
+                        <option value="fins_semana">Fins de Semana</option>
+                    </select>
+                </div>
+                
+                <div class="form-group mb-3">
+                    <label for="contato">Forma de Contato Preferida</label>
+                    <select class="form-control" id="contato" name="contato" required>
+                        <option value="">Selecione uma forma de contato</option>
+                        <option value="telefone">Telefone</option>
+                        <option value="whatsapp">WhatsApp</option>
+                        <option value="email">E-mail</option>
+                        <option value="presencial">Presencial</option>
+                    </select>
+                </div>
+                
+                <button type="submit" class="btn btn-primary">Enviar Interesse</button>
+            </form>
+        </div>
+    </div>
+    
+    <div class="row mt-4">
+        <div class="col-12">
+            <div class="card mb-4">
+                <div class="card-header">
+                    <i class="fas fa-info-circle mr-1"></i>
+                    Informações
+                </div>
+                <div class="card-body">
+                    <p>Sua manifestação de interesse é muito importante para nós. Entraremos em contato em breve para mais informações sobre o curso escolhido!</p>
+                </div>
+            </div>
+            <div class="card mb-4">
+                <div class="card-header">
+                    <i class="fab fa-whatsapp mr-1"></i>
+                    WhatsApp
+                </div>
+                <div class="card-body">
+                    <a href="https://api.whatsapp.com/send?phone=1137669911" target="_blank" class="btn btn-success">
+                        <i class="fab fa-whatsapp"></i> Fale conosco no WhatsApp
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

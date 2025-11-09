@@ -1,0 +1,56 @@
+{% extends 'usuarios/base.html' %}
+
+{% block content %}
+<div class="container mt-4">
+    <h2 class="mb-4">Autenticação</h2>
+    
+    <div class="card mb-4">
+        <div class="card-header">
+            <i class="fas fa-user-lock mr-1"></i>
+            Acesso à Pesquisa de Cursos
+        </div>
+        <div class="card-body">
+            <form method="post" action="{% url 'autenticacao' %}">
+                {% csrf_token %}
+
+                <div class="form-group mb-3">
+                    <label for="matricula">Matrícula</label>
+                    <input type="text" class="form-control" id="matricula" name="matricula" required>
+                </div>
+
+                <div class="form-group mb-3">
+                    <label for="senha">Senha</label>
+                    <input type="password" class="form-control" id="senha" name="senha" required>
+                </div>
+
+                <button type="submit" class="btn btn-primary">Entrar</button>
+            </form>
+        </div>
+    </div>
+
+    <div class="row mt-4">
+        <div class="col-12">
+            <div class="card mb-4">
+                <div class="card-header">
+                    <i class="fas fa-info-circle mr-1"></i>
+                    Informações
+                </div>
+                <div class="card-body">
+                    <p>Informe sua matrícula e senha para acessar a página de avaliação de cursos.</p>
+                </div>
+            </div>
+            <div class="card mb-4">
+                <div class="card-header">
+                    <i class="fab fa-whatsapp mr-1"></i>
+                    WhatsApp
+                </div>
+                <div class="card-body">
+                    <a href="https://api.whatsapp.com/send?phone=1137669911" target="_blank" class="btn btn-success">
+                        <i class="fab fa-whatsapp"></i> Fale conosco no WhatsApp
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
